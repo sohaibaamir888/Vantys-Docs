@@ -1,461 +1,628 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vantys Docs</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+# Vantys Documentation
 
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 50%, #f8f8f8 100%);
-            color: #1a1a1a;
-            line-height: 1.6;
-            min-height: 100vh;
-        }
+<div style="font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif; font-size: 16px; line-height: 1.6; color: #333;">
 
-        /* Header */
-        header {
-            background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
-            border-bottom: 1px solid #e5e5e5;
-            padding: 1.5rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        }
+## Welcome to Vantys
 
-        .header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+Vantys is a comprehensive platform designed to empower developers and teams with cutting-edge tools and solutions. This documentation provides complete guidance on getting started, API references, and best practices.
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #0d47a1;
-        }
+---
 
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #666;
-        }
+## Quick Navigation
 
-        /* Main Container */
-        .container {
-            display: flex;
-            max-width: 1400px;
-            margin: 0 auto;
-            gap: 2rem;
-            padding: 2rem;
-            min-height: calc(100vh - 80px);
-        }
+<details open>
+<summary><strong>📚 Getting Started</strong></summary>
 
-        /* Left Sidebar Navigation */
-        .sidebar {
-            width: 280px;
-            background: #ffffff;
-            border-radius: 8px;
-            border: 1px solid #e5e5e5;
-            padding: 1.5rem;
-            height: fit-content;
-            position: sticky;
-            top: 100px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Your First Request](#your-first-request)
 
-        .sidebar.collapsed {
-            width: 60px;
-        }
+</details>
 
-        .sidebar.collapsed .nav-label {
-            display: none;
-        }
+<details>
+<summary><strong>🔌 API Reference</strong></summary>
 
-        .sidebar.collapsed .nav-item span {
-            display: none;
-        }
+- [Authentication](#authentication)
+- [Endpoints](#endpoints)
+- [Rate Limiting](#rate-limiting)
+- [Error Handling](#error-handling)
 
-        .sidebar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #e5e5e5;
-        }
+</details>
 
-        .nav-label {
-            font-size: 0.875rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            color: #666;
-            letter-spacing: 0.5px;
-            transition: opacity 0.3s ease;
-        }
+<details>
+<summary><strong>🛠️ Guides & Tutorials</strong></summary>
 
-        .toggle-btn {
-            background: none;
-            border: none;
-            font-size: 1.2rem;
-            cursor: pointer;
-            color: #999;
-            padding: 0.25rem;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-        }
+- [Integration Guide](#integration-guide)
+- [Advanced Usage](#advanced-usage)
+- [Webhooks](#webhooks)
+- [SDK Reference](#sdk-reference)
 
-        .toggle-btn:hover {
-            background-color: #f0f0f0;
-            color: #333;
-        }
+</details>
 
-        nav ul {
-            list-style: none;
-        }
+<details>
+<summary><strong>⚙️ Advanced Topics</strong></summary>
 
-        nav li {
-            margin-bottom: 0.5rem;
-        }
+- [Security Best Practices](#security-best-practices)
+- [Performance Optimization](#performance-optimization)
+- [Troubleshooting](#troubleshooting)
+- [FAQ](#faq)
 
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            color: #666;
-            text-decoration: none;
-            font-size: 0.95rem;
-            user-select: none;
-        }
+</details>
 
-        .nav-item:hover {
-            background-color: #f5f5f5;
-            color: #0d47a1;
-        }
+---
 
-        .nav-item.active {
-            background-color: #e3f2fd;
-            color: #0d47a1;
-            font-weight: 500;
-        }
+## Introduction
 
-        .nav-item-icon {
-            font-size: 1.1rem;
-            flex-shrink: 0;
-            width: 20px;
-            text-align: center;
-        }
+Vantys provides a unified platform for managing your application's core functionality. Whether you're building a simple integration or a complex system, Vantys has the tools and documentation to help you succeed.
 
-        .submenu {
-            display: none;
-            list-style: none;
-            margin-top: 0.5rem;
-            padding-left: 2.25rem;
-        }
+### Key Features
 
-        .submenu.open {
-            display: block;
-        }
+- **Easy Integration**: Get up and running in minutes with our simple API
+- **Scalability**: Built to handle millions of requests with consistent performance
+- **Security**: Enterprise-grade security with encryption and compliance standards
+- **Developer Friendly**: Comprehensive documentation and code examples in multiple languages
+- **Real-time Updates**: WebSocket support for real-time data synchronization
 
-        .submenu li {
-            margin-bottom: 0.35rem;
-        }
+---
 
-        .submenu-item {
-            padding: 0.5rem 0.75rem;
-            font-size: 0.85rem;
-            color: #999;
-            transition: all 0.2s ease;
-        }
+## Installation
 
-        .submenu-item:hover {
-            color: #0d47a1;
-        }
+### Prerequisites
 
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            background: #ffffff;
-            border-radius: 8px;
-            border: 1px solid #e5e5e5;
-            padding: 2.5rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        }
+Before you begin, ensure you have the following:
 
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: #0d47a1;
-        }
+- Node.js 14+ or Python 3.8+
+- npm or pip package manager
+- A valid Vantys API key
 
-        h2 {
-            font-size: 1.75rem;
-            font-weight: 600;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            color: #1a1a1a;
-        }
+### Using npm
 
-        h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
-            color: #1a1a1a;
-        }
+```bash
+npm install vantys
+```
 
-        p {
-            margin-bottom: 1rem;
-            color: #666;
-        }
+### Using pip
 
-        code {
-            background: #f5f5f5;
-            padding: 0.2rem 0.4rem;
-            border-radius: 3px;
-            font-family: 'Monaco', 'Courier New', monospace;
-            font-size: 0.9em;
-            color: #d73a49;
-        }
+```bash
+pip install vantys
+```
 
-        pre {
-            background: #1e1e1e;
-            color: #e0e0e0;
-            padding: 1.5rem;
-            border-radius: 6px;
-            overflow-x: auto;
-            margin-bottom: 1.5rem;
-            font-family: 'Monaco', 'Courier New', monospace;
-            font-size: 0.85rem;
-            line-height: 1.5;
-        }
+### Using Docker
 
-        pre code {
-            background: none;
-            color: #e0e0e0;
-            padding: 0;
-            border-radius: 0;
-        }
+```bash
+docker pull vantys/sdk:latest
+docker run -e API_KEY=your_key vantys/sdk:latest
+```
 
-        a {
-            color: #0d47a1;
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: all 0.2s ease;
-        }
+---
 
-        a:hover {
-            border-bottom-color: #0d47a1;
-        }
+## Configuration
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-                gap: 1rem;
-            }
+### Environment Setup
 
-            .sidebar {
-                width: 100%;
-                position: static;
-                margin-bottom: 1rem;
-            }
+Create a `.env` file in your project root:
 
-            .sidebar.collapsed {
-                width: 100%;
-            }
+```env
+VANTYS_API_KEY=your_api_key_here
+VANTYS_API_URL=https://api.vantys.io
+VANTYS_TIMEOUT=30
+VANTYS_RETRY_ATTEMPTS=3
+```
 
-            .sidebar.collapsed .nav-label {
-                display: inline;
-            }
+### Initialize the Client
 
-            .sidebar.collapsed .nav-item span {
-                display: inline;
-            }
+**JavaScript/Node.js:**
 
-            .main-content {
-                padding: 1.5rem;
-            }
+```javascript
+const Vantys = require('vantys');
 
-            h1 {
-                font-size: 2rem;
-            }
+const client = new Vantys.Client({
+  apiKey: process.env.VANTYS_API_KEY,
+  endpoint: process.env.VANTYS_API_URL
+});
+```
 
-            h2 {
-                font-size: 1.5rem;
-            }
+**Python:**
 
-            .menu-toggle {
-                display: block;
-            }
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <div class="header-content">
-            <div class="logo">Vantys Docs</div>
-            <button class="menu-toggle" id="mobileMenuToggle">☰</button>
-        </div>
-    </header>
+```python
+import vantys
 
-    <div class="container">
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <span class="nav-label">Navigation</span>
-                <button class="toggle-btn" id="sidebarToggle" title="Toggle sidebar">«</button>
-            </div>
-            <nav>
-                <ul>
-                    <li>
-                        <a href="#" class="nav-item active">
-                            <span class="nav-item-icon">🏠</span>
-                            <span>Home</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-item" onclick="toggleSubmenu(event, this)">
-                            <span class="nav-item-icon">📚</span>
-                            <span>Getting Started</span>
-                        </a>
-                        <ul class="submenu">
-                            <li><a href="#" class="submenu-item">Installation</a></li>
-                            <li><a href="#" class="submenu-item">Configuration</a></li>
-                            <li><a href="#" class="submenu-item">First Steps</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-item" onclick="toggleSubmenu(event, this)">
-                            <span class="nav-item-icon">⚙️</span>
-                            <span>API Reference</span>
-                        </a>
-                        <ul class="submenu">
-                            <li><a href="#" class="submenu-item">Authentication</a></li>
-                            <li><a href="#" class="submenu-item">Endpoints</a></li>
-                            <li><a href="#" class="submenu-item">Status Codes</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-item" onclick="toggleSubmenu(event, this)">
-                            <span class="nav-item-icon">🔧</span>
-                            <span>Guides</span>
-                        </a>
-                        <ul class="submenu">
-                            <li><a href="#" class="submenu-item">Tutorials</a></li>
-                            <li><a href="#" class="submenu-item">Best Practices</a></li>
-                            <li><a href="#" class="submenu-item">Examples</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-item">
-                            <span class="nav-item-icon">❓</span>
-                            <span>FAQ</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" class="nav-item">
-                            <span class="nav-item-icon">📞</span>
-                            <span>Support</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </aside>
+client = vantys.Client(
+    api_key=os.getenv('VANTYS_API_KEY'),
+    endpoint=os.getenv('VANTYS_API_URL')
+)
+```
 
-        <main class="main-content">
-            <h1>Welcome to Vantys Documentation</h1>
-            <p>Comprehensive guides and documentation for the Vantys platform. Get started quickly with our easy-to-follow tutorials and detailed API reference.</p>
+---
 
-            <h2>What is Vantys?</h2>
-            <p>Vantys is a powerful, modern platform designed to help you build amazing applications with ease. Our documentation covers everything you need to know to get started and become an expert.</p>
+## Your First Request
 
-            <h2>Quick Start</h2>
-            <p>Get up and running in minutes with our quick start guide:</p>
-            <pre><code>npm install vantys
-import Vantys from 'vantys';
+### Making a Simple API Call
 
-const vantys = new Vantys({
-    apiKey: 'your-api-key'
+**JavaScript:**
+
+```javascript
+async function getUser() {
+  try {
+    const user = await client.users.retrieve('user_123');
+    console.log(user);
+  } catch (error) {
+    console.error('Error:', error.message);
+  }
+}
+
+getUser();
+```
+
+**Python:**
+
+```python
+try:
+    user = client.users.retrieve('user_123')
+    print(user)
+except vantys.VantysError as e:
+    print(f"Error: {e}")
+```
+
+**cURL:**
+
+```bash
+curl -H "Authorization: Bearer YOUR_API_KEY" \
+  https://api.vantys.io/v1/users/user_123
+```
+
+---
+
+## Authentication
+
+Vantys uses API key authentication for all requests. Include your API key in the Authorization header:
+
+```
+Authorization: Bearer YOUR_API_KEY
+```
+
+### Getting Your API Key
+
+1. Log in to your Vantys Dashboard
+2. Navigate to **Settings** → **API Keys**
+3. Click **Generate New Key**
+4. Copy and store your key securely
+
+> ⚠️ **Security Note**: Never commit API keys to version control. Always use environment variables.
+
+---
+
+## Endpoints
+
+### Base URL
+
+```
+https://api.vantys.io/v1
+```
+
+### Core Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/users/{id}` | Retrieve a user |
+| POST | `/users` | Create a new user |
+| PUT | `/users/{id}` | Update a user |
+| DELETE | `/users/{id}` | Delete a user |
+| GET | `/resources` | List resources |
+| POST | `/resources` | Create a resource |
+
+---
+
+## Rate Limiting
+
+Vantys implements rate limiting to ensure fair usage:
+
+- **Free Tier**: 100 requests per minute
+- **Pro Tier**: 1,000 requests per minute
+- **Enterprise**: Custom limits
+
+### Rate Limit Headers
+
+```
+X-RateLimit-Limit: 1000
+X-RateLimit-Remaining: 999
+X-RateLimit-Reset: 1609459200
+```
+
+---
+
+## Error Handling
+
+### Error Response Format
+
+```json
+{
+  "error": {
+    "code": "invalid_request",
+    "message": "Missing required parameter: api_key",
+    "status": 400,
+    "request_id": "req_1234567890"
+  }
+}
+```
+
+### Common Error Codes
+
+| Code | Status | Description |
+|------|--------|-------------|
+| `unauthorized` | 401 | Invalid or missing API key |
+| `forbidden` | 403 | Insufficient permissions |
+| `not_found` | 404 | Resource not found |
+| `rate_limited` | 429 | Too many requests |
+| `server_error` | 500 | Internal server error |
+
+### Error Handling Example
+
+**JavaScript:**
+
+```javascript
+client.users.retrieve('user_123')
+  .then(user => console.log(user))
+  .catch(error => {
+    switch(error.code) {
+      case 'unauthorized':
+        console.error('Invalid API key');
+        break;
+      case 'not_found':
+        console.error('User not found');
+        break;
+      default:
+        console.error('Unknown error:', error.message);
+    }
+  });
+```
+
+---
+
+## Integration Guide
+
+### Step-by-Step Integration
+
+#### Step 1: Install SDK
+
+```bash
+npm install vantys
+```
+
+#### Step 2: Initialize Client
+
+```javascript
+const client = new Vantys.Client({
+  apiKey: 'your_api_key'
+});
+```
+
+#### Step 3: Create Your First Resource
+
+```javascript
+const resource = await client.resources.create({
+  name: 'My Resource',
+  type: 'api',
+  configuration: {}
+});
+```
+
+#### Step 4: Query the Resource
+
+```javascript
+const data = await client.resources.query(resource.id, {
+  limit: 10,
+  offset: 0
+});
+```
+
+---
+
+## Advanced Usage
+
+### Batch Operations
+
+```javascript
+const batch = await client.batch.create({
+  operations: [
+    { action: 'create', resource: 'users', data: { name: 'Alice' } },
+    { action: 'create', resource: 'users', data: { name: 'Bob' } },
+    { action: 'update', resource: 'users', id: 'user_1', data: { status: 'active' } }
+  ]
 });
 
-// You're ready to go!
-vantys.connect();</code></pre>
+console.log(batch.results);
+```
 
-            <h2>Key Features</h2>
-            <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                <li style="margin-bottom: 0.5rem;"><strong>Easy Integration</strong> - Simple API for quick integration</li>
-                <li style="margin-bottom: 0.5rem;"><strong>Scalability</strong> - Built to scale with your needs</li>
-                <li style="margin-bottom: 0.5rem;"><strong>Real-time</strong> - Real-time updates and notifications</li>
-                <li style="margin-bottom: 0.5rem;"><strong>Security</strong> - Enterprise-grade security features</li>
-            </ul>
+### Streaming Large Datasets
 
-            <h2>Documentation Sections</h2>
-            <p>Browse through our documentation using the navigation menu on the left:</p>
-            <ul style="margin-left: 1.5rem; margin-bottom: 1.5rem;">
-                <li style="margin-bottom: 0.5rem;"><strong>Getting Started</strong> - Installation and initial setup</li>
-                <li style="margin-bottom: 0.5rem;"><strong>API Reference</strong> - Complete API documentation</li>
-                <li style="margin-bottom: 0.5rem;"><strong>Guides</strong> - Tutorials and best practices</li>
-                <li style="margin-bottom: 0.5rem;"><strong>FAQ</strong> - Frequently asked questions</li>
-            </ul>
+```javascript
+const stream = client.resources.stream('resource_id', {
+  batchSize: 1000,
+  format: 'json'
+});
 
-            <h2>Need Help?</h2>
-            <p>If you can't find what you're looking for, feel free to reach out to our support team at <a href="mailto:support@vantys.com">support@vantys.com</a> or visit our <a href="#">support page</a>.</p>
-        </main>
-    </div>
+stream.on('data', (chunk) => {
+  console.log('Received batch of', chunk.length, 'records');
+});
 
-    <script>
-        const sidebarToggle = document.getElementById('sidebarToggle');
-        const sidebar = document.getElementById('sidebar');
-        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+stream.on('error', (error) => {
+  console.error('Stream error:', error);
+});
+```
 
-        // Toggle sidebar collapse
-        sidebarToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('collapsed');
-            sidebarToggle.textContent = sidebar.classList.contains('collapsed') ? '»' : '«';
-        });
+---
 
-        // Mobile menu toggle
-        mobileMenuToggle.addEventListener('click', () => {
-            sidebar.classList.toggle('collapsed');
-        });
+## Webhooks
 
-        // Toggle submenu
-        function toggleSubmenu(e, element) {
-            e.preventDefault();
-            const submenu = element.nextElementSibling;
-            if (submenu && submenu.classList.contains('submenu')) {
-                submenu.classList.toggle('open');
-            }
-        }
+### Setting Up Webhooks
 
-        // Set active nav item on click
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function(e) {
-                if (!this.nextElementSibling || !this.nextElementSibling.classList.contains('submenu')) {
-                    e.preventDefault();
-                    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-                    this.classList.add('active');
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+Register webhook endpoints to receive real-time event notifications:
+
+```javascript
+await client.webhooks.register({
+  url: 'https://yourapp.com/webhook',
+  events: ['user.created', 'user.updated', 'resource.deleted'],
+  secret: 'your_webhook_secret'
+});
+```
+
+### Webhook Event Format
+
+```json
+{
+  "id": "evt_1234567890",
+  "type": "user.created",
+  "timestamp": "2024-12-24T18:48:12Z",
+  "data": {
+    "user_id": "user_123",
+    "email": "user@example.com"
+  }
+}
+```
+
+### Verifying Webhook Signatures
+
+```javascript
+const crypto = require('crypto');
+
+function verifyWebhookSignature(body, signature, secret) {
+  const hash = crypto
+    .createHmac('sha256', secret)
+    .update(body)
+    .digest('hex');
+  return hash === signature;
+}
+```
+
+---
+
+## SDK Reference
+
+### Available SDKs
+
+- [JavaScript/Node.js](https://github.com/vantys/sdk-js)
+- [Python](https://github.com/vantys/sdk-python)
+- [Go](https://github.com/vantys/sdk-go)
+- [Ruby](https://github.com/vantys/sdk-ruby)
+- [Java](https://github.com/vantys/sdk-java)
+
+### Common Methods
+
+```javascript
+// Users
+client.users.list()
+client.users.retrieve(id)
+client.users.create(data)
+client.users.update(id, data)
+client.users.delete(id)
+
+// Resources
+client.resources.list()
+client.resources.retrieve(id)
+client.resources.create(data)
+client.resources.update(id, data)
+client.resources.delete(id)
+
+// Batch Operations
+client.batch.create(operations)
+client.batch.status(id)
+client.batch.results(id)
+```
+
+---
+
+## Security Best Practices
+
+### API Key Management
+
+- ✅ Store API keys in environment variables
+- ✅ Rotate keys regularly
+- ✅ Use separate keys for development and production
+- ❌ Never hardcode API keys
+- ❌ Never commit keys to version control
+- ❌ Don't share keys across teams
+
+### Network Security
+
+```javascript
+// Enable certificate validation (default)
+const client = new Vantys.Client({
+  apiKey: 'your_key',
+  rejectUnauthorized: true
+});
+
+// Use TLS 1.2 or higher
+const client = new Vantys.Client({
+  apiKey: 'your_key',
+  minTlsVersion: '1.2'
+});
+```
+
+### Data Encryption
+
+All data in transit is encrypted using TLS 1.2+. For sensitive data at rest, consider encryption:
+
+```javascript
+const encrypted = await client.crypto.encrypt(data, 'encryption_key');
+const decrypted = await client.crypto.decrypt(encrypted, 'encryption_key');
+```
+
+---
+
+## Performance Optimization
+
+### Connection Pooling
+
+```javascript
+const client = new Vantys.Client({
+  apiKey: 'your_key',
+  maxConnections: 10,
+  keepAlive: true
+});
+```
+
+### Caching Strategy
+
+```javascript
+const client = new Vantys.Client({
+  apiKey: 'your_key',
+  cache: {
+    enabled: true,
+    ttl: 300, // 5 minutes
+    maxSize: 1000
+  }
+});
+```
+
+### Batch Requests
+
+```javascript
+// Instead of multiple individual requests
+for (let id of userIds) {
+  await client.users.retrieve(id); // Slow
+}
+
+// Use batch operations
+const users = await client.batch.retrieve({
+  resource: 'users',
+  ids: userIds
+}); // Fast
+```
+
+---
+
+## Troubleshooting
+
+### Common Issues
+
+#### Issue: "Unauthorized" Error
+
+**Solution:**
+- Verify your API key is correct
+- Check that the key is still valid (not expired)
+- Ensure proper header format: `Authorization: Bearer YOUR_KEY`
+
+#### Issue: Rate Limiting
+
+**Solution:**
+- Implement exponential backoff
+- Check rate limit headers
+- Consider upgrading your plan
+
+#### Issue: Timeout Errors
+
+**Solution:**
+```javascript
+const client = new Vantys.Client({
+  apiKey: 'your_key',
+  timeout: 60000 // 60 seconds
+});
+```
+
+#### Issue: Connection Issues
+
+**Solution:**
+- Verify network connectivity
+- Check firewall rules
+- Use a VPN if accessing from restricted network
+- Enable debug logging:
+
+```javascript
+const client = new Vantys.Client({
+  apiKey: 'your_key',
+  debug: true
+});
+```
+
+---
+
+## FAQ
+
+### General Questions
+
+**Q: What is Vantys?**
+A: Vantys is a comprehensive platform providing APIs and tools for modern application development.
+
+**Q: Is there a free tier?**
+A: Yes! Our free tier includes 100 API requests per minute, perfect for development and testing.
+
+**Q: Do you offer SLA?**
+A: Enterprise customers receive a 99.9% uptime SLA with dedicated support.
+
+### Technical Questions
+
+**Q: What languages do you support?**
+A: We provide official SDKs for JavaScript, Python, Go, Ruby, and Java, with community support for others.
+
+**Q: How do I handle pagination?**
+A: Use `limit` and `offset` parameters in list endpoints.
+
+```javascript
+const page1 = await client.users.list({ limit: 20, offset: 0 });
+const page2 = await client.users.list({ limit: 20, offset: 20 });
+```
+
+**Q: Can I use Vantys with serverless functions?**
+A: Absolutely! Our lightweight SDK works perfectly with AWS Lambda, Google Cloud Functions, and Azure Functions.
+
+**Q: How do I report a security issue?**
+A: Please email security@vantys.io with details. We take security seriously and offer a responsible disclosure program.
+
+---
+
+## Getting Help
+
+### Support Channels
+
+- 📧 **Email**: support@vantys.io
+- 💬 **Community**: [Discord Server](https://discord.gg/vantys)
+- 📖 **Docs**: You're reading them!
+- 🐛 **Issues**: [GitHub Issues](https://github.com/vantys/sdk-js/issues)
+
+### Additional Resources
+
+- [Blog](https://vantys.io/blog)
+- [API Status](https://status.vantys.io)
+- [Security Policy](https://vantys.io/security)
+- [Terms of Service](https://vantys.io/terms)
+
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 2.0.0 | 2024-12-24 | Major release with webhooks and batch operations |
+| 1.5.0 | 2024-11-15 | Added streaming support |
+| 1.4.0 | 2024-10-20 | Improved error handling |
+| 1.3.0 | 2024-09-10 | New authentication methods |
+
+---
+
+<footer style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e0e0e0; color: #666; font-size: 14px; text-align: center;">
+<p>© 2024 Vantys. All rights reserved. | <a href="#" style="color: #0066cc;">Privacy Policy</a> | <a href="#" style="color: #0066cc;">Terms of Service</a></p>
+</footer>
+
+</div>
